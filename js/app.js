@@ -37,7 +37,7 @@ $(document).ready(function(){
 
   	/* newGame function invoked by clicking 'New Game' */
   	function newGame() {
-  		var randomNumber = createNumber(); /* Generate new random number */
+  		randomNumber = createNumber(); /* Generate new random number */
   		setFeedback("Make your Guess!"); /* Return h2#feedback to original text */
   		/* Return span#count to 0 */
   		$('#guessList').empty(); /* Clear ul#guessList */
