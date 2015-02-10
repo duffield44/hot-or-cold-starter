@@ -6,6 +6,7 @@ $(document).ready(function(){
 	var guessNum;
 	var guessTest;
 	var guessCount;
+	var validGuess;
 
 	/*--- Create random number ---*/
 	function createNumber() {
@@ -28,8 +29,6 @@ $(document).ready(function(){
   		$(".overlay").fadeOut(1000);
   	});
 
-  	/*------- 'New Game' button Functionality -----------*/
-
   	/* Click 'New Game' to invoke New Game function */ 
   	$('.new').click(function(){
   		console.log('Clicked NEW GAME');
@@ -43,6 +42,7 @@ $(document).ready(function(){
   		guessCount = 0; /* Return span#count to 0 */
   		displayCount();
   		$('#guessList').empty(); /* Clear ul#guessList */
+  		clearInput();
 
   	}
 
@@ -52,16 +52,44 @@ $(document).ready(function(){
   		var guessVal = $('#userGuess').val();
   		var guessNum = +guessVal;
   		console.log('Users Guess: ' + guessNum);
-  		guessTest = tempFeedback(Math.abs(randomNumber - guessNum));
-  		guessCount++;
-  		displayCount();
-  		$('#guessList').append('<li>' + guessNum + '</li>');
+  		validGuess = checkGuess(guessNum);
+  		if (validGuess) {
+  			guessTest = tempFeedback(Math.abs(randomNumber - guessNum));
+  			guessCount++;
+  			displayCount();
+  			$('#guessList').append('<li>' + guessNum + '</li>');
+  		}
+  		clearInput();
   	})
 
 
   	/*--- Diplay number of guesses ---*/
   	function displayCount() {
   		$('#count').text(guessCount);
+  	}
+
+  	/*--- Clear input box ---*/
+  	function clearInput() {
+  		$('#userGuess').val('');
+  	}
+
+  	/*--- Check user has provided a valid input and give feedback ---*/
+  	function checkGuess(x) {
+  		if (isNaN(x)) {
+  			setFeedback('Oops! Please guess with a number.');
+  			return false;
+  		}
+  		else if (x != Math.floor(x)) {
+  			setFeedback('Oops! Please guess with an integer. Not a decimal.');
+  			return false;
+  		}
+  		else if (x < 1 || x > 100) {
+  			setFeedback('Oops! Please guess with a number between 1 and 100.');
+  			return false;
+  		}
+  		else {
+  			return true;
+  		}
   	}
   	
 
