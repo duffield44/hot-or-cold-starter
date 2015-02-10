@@ -5,6 +5,7 @@ $(document).ready(function(){
 	var randomNumber;
 	var guessNum;
 	var guessTest;
+	var guessCount;
 
 	/*--- Create random number ---*/
 	function createNumber() {
@@ -39,8 +40,10 @@ $(document).ready(function(){
   	function newGame() {
   		randomNumber = createNumber(); /* Generate new random number */
   		setFeedback("Make your Guess!"); /* Return h2#feedback to original text */
-  		/* Return span#count to 0 */
+  		guessCount = 0; /* Return span#count to 0 */
+  		displayCount();
   		$('#guessList').empty(); /* Clear ul#guessList */
+
   	}
 
   	/*--- Form Submission ---*/
@@ -50,10 +53,15 @@ $(document).ready(function(){
   		var guessNum = +guessVal;
   		console.log('Users Guess: ' + guessNum);
   		guessTest = tempFeedback(Math.abs(randomNumber - guessNum));
+  		guessCount++;
+  		displayCount();
   	})
 
 
-  	/* User's Guess */
+  	/*--- Diplay number of guesses ---*/
+  	function displayCount() {
+  		$('#count').text(guessCount);
+  	}
   	
 
   	/* Post feedback on the user's guess */
