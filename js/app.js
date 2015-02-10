@@ -55,6 +55,7 @@ $(document).ready(function(){
   		guessTest = tempFeedback(Math.abs(randomNumber - guessNum));
   		guessCount++;
   		displayCount();
+  		$('#guessList').append('<li>' + guessNum + '</li>');
   	})
 
 
