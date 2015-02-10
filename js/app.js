@@ -4,6 +4,7 @@ $(document).ready(function(){
 	/*--- Variable Declarations ---*/
 	var randomNumber;
 	var guessNum;
+	var guessTest;
 
 	/*--- Create random number ---*/
 	function createNumber() {
@@ -48,7 +49,7 @@ $(document).ready(function(){
   		var guessVal = $('#userGuess').val();
   		var guessNum = +guessVal;
   		console.log('Users Guess: ' + guessNum);
-  		tempFeedback();
+  		guessTest = tempFeedback(Math.abs(randomNumber - guessNum));
   	})
 
 
@@ -56,17 +57,32 @@ $(document).ready(function(){
   	
 
   	/* Post feedback on the user's guess */
-  	function tempFeedback() {
+  	function tempFeedback(num) {
   		console.log('Form has been submitted');
-  		if (guessNum == randomNumber) {
-  			setFeedback('Correct Answer!')
+  		if (num == 0) {
+  			setFeedback('Correct Answer! You Win!');
+  		}
+  		else if (num > 0 && num <= 5) {
+  			setFeedback('Your Guess is Boiling Hot!');
+  		}
+  		else if (num > 5 && num <= 10) {
+  			setFeedback('Your Guess is Very Hot');
+  		}
+  		else if (num > 10 && num <= 20) {
+  			setFeedback('Your Guess is Hot');
+  		}
+  		else if (num > 20 && num <= 30) {
+  			setFeedback('Your Guess is Warm');
+  		}
+  		else if (num > 30 && num <= 40) {
+  			setFeedback('Your Guess is Cold');
+  		}
+  		else if (num > 40 && num <= 50) {
+  			setFeedback('Your Guess is Very Cold');
   		}
   		else {
-  			setFeedback('Make your Guess!')
+  			setFeedback('Your Guess is Freezing Cold');
   		}
-  		
-
-
   	}
   	
 
